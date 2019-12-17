@@ -19,4 +19,6 @@ provider "digitalocean" {
 }
 
 provider "helm" {
+  install_tiller = false
+  max_history    = 20
 }
