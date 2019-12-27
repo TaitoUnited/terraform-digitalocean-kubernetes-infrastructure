@@ -19,6 +19,7 @@ resource "digitalocean_database_cluster" "postgres" {
 
   name       = var.postgres_instances[count.index]
   engine     = "pg"
+  version    = "11" # TODO: configurable
   size       = var.postgres_node_sizes[count.index]
   region     = var.region
   node_count = var.postgres_node_counts[count.index]

@@ -14,11 +14,28 @@
  * limitations under the License.
  */
 
+/* Labeling */
+
+variable "name" {
+  type        = string
+  description = "Name that groups all the created resources together. Preferably globally unique to avoid naming conflicts."
+}
+
 /* DO provider */
 
 variable "do_token" {
   type        = string
   description = "Digital Ocean personal access token."
+}
+
+variable "spaces_access_id" {
+  type        = string
+  description = "Digital Ocean Spaces access id."
+}
+
+variable "spaces_secret_key" {
+  type        = string
+  description = "Digital Ocean Spaces secret key."
 }
 
 variable "region" {
