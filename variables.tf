@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 Taito United
+ * Copyright 2020 Taito United
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/* Helm */
+
+variable "helm_enabled" {
+  type        = bool
+  default     = "false"
+  description = "Installs helm apps if set to true. Should be set to true only after Kubernetes cluster already exists."
+}
 
 /* Labeling */
 
@@ -56,96 +64,4 @@ variable "state_bucket" {
   type        = string
   default     = ""
   description = "Name of storage bucket used for storing remote Terraform state."
-}
-
-/* Helm */
-
-variable "helm_enabled" {
-  type        = bool
-  default     = "false"
-  description = "Installs helm apps if set to true. Should be set to true only after Kubernetes cluster already exists."
-}
-
-variable "helm_nginx_ingress_classes" {
-  type    = list(string)
-  default = []
-  description = "NGINX ingress class for each NGINX ingress installation. Provide multiple if you want to install multiple NGINX ingresses."
-}
-
-variable "helm_nginx_ingress_replica_counts" {
-  type    = list(string)
-  default = []
-  description = "Replica count for each NGINX ingress installation. Provide multiple if you want to install multiple NGINX ingresses."
-}
-
-/* Kubernetes */
-
-variable "kubernetes_name" {
-  type = string
-  default = ""
-  description = "Name for the Kubernetes cluster."
-}
-
-variable "kubernetes_context" {
-  type        = string
-  default     = ""
-  description = "Kubernetes context. Value of var.name is used by default."
-}
-
-variable "kubernetes_version" {
-  type        = string
-  default     = ""
-  description = "Kubernetes version"
-}
-
-variable "kubernetes_node_size" {
-  type        = string
-  default     = "s-2vcpu-2gb"
-  description = "Size of Kubernetes nodes."
-}
-
-variable "kubernetes_node_count" {
-  type = number
-  default = 1
-  description = "Amount of Kubernetes nodes."
-}
-
-/* Postgres */
-
-variable "postgres_instances" {
-  type    = list(string)
-  default = []
-  description = "Name for each PostgreSQL cluster. Provide multiple if you require multiple PostgreSQL clusters."
-}
-
-variable "postgres_node_sizes" {
-  type    = list(string)
-  default = []
-  description = "Node dize for each PostgreSQL cluster. Provide multiple if you require multiple clusters."
-}
-
-variable "postgres_node_counts" {
-  type    = list(string)
-  default = []
-  description = "Node count for each PostgreSQL cluster. Provide multiple if you require multiple clusters."
-}
-
-/* MySQL */
-
-variable "mysql_instances" {
-  type    = list(string)
-  default = []
-  description = "Name for each MySQL cluster. Provide multiple if you require multiple clusters."
-}
-
-variable "mysql_node_sizes" {
-  type    = list(string)
-  default = []
-  description = "Node size for each MySQL cluster. Provide multiple if you require multiple clusters."
-}
-
-variable "mysql_node_counts" {
-  type    = list(string)
-  default = []
-  description = "Node count for each MySQL cluster. Provide multiple if you require multiple clusters."
 }

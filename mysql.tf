@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 Taito United
+ * Copyright 2020 Taito United
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,13 @@
  */
 
 resource "digitalocean_database_cluster" "mysql" {
-  count      = length(var.mysql_instances)
+  count      = length(local.mysqlClusters)
 
-  name       = var.mysql_instances[count.index]
+  name       = local.mysqlClusters[count.index].name
   engine     = "mysql"
-  size       = var.mysql_node_sizes[count.index]
+  size       = local.mysqlClusters[count.index].tier
   region     = var.region
-  node_count = var.mysql_node_counts[count.index]
+  node_count = local.mysqlClusters[count.index].nodeCount
 
   lifecycle {
     prevent_destroy = true

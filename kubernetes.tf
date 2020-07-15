@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 Taito United
+ * Copyright 2020 Taito United
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,17 @@
  */
 
 resource "digitalocean_kubernetes_cluster" "kubernetes" {
-  count   = var.kubernetes_name != "" ? 1 : 0
+  count   = local.kubernetes.name != "" ? 1 : 0
 
-  name    = var.kubernetes_name
+  name    = local.kubernetes.name
   region  = var.region
-  version = var.kubernetes_version
+  version = local.kubernetes.version
 
+  # TODO: support for multiple pools and maxNodeCount
   node_pool {
     name       = "worker-pool"
-    size       = var.kubernetes_node_size
-    node_count = var.kubernetes_node_count
+    size       = local.kubernetes.nodePools[0].size
+    node_count = local.kubernetes.nodePools[0].minNodeCount
   }
 
   lifecycle {

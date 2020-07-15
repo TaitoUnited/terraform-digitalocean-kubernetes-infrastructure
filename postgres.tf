@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 Taito United
+ * Copyright 2020 Taito United
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,14 @@
  */
 
 resource "digitalocean_database_cluster" "postgres" {
-  count      = length(var.postgres_instances)
+  count      = length(local.postgresClusters)
 
-  name       = var.postgres_instances[count.index]
+  name       = local.postgresClusters[count.index].name
   engine     = "pg"
-  version    = "11" # TODO: configurable
-  size       = var.postgres_node_sizes[count.index]
+  version    = local.postgresClusters[count.index].version
+  size       = local.postgresClusters[count.index].tier
   region     = var.region
-  node_count = var.postgres_node_counts[count.index]
+  node_count = local.postgresClusters[count.index].nodeCount
 
   lifecycle {
     prevent_destroy = true
