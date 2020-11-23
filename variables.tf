@@ -65,3 +65,10 @@ variable "state_bucket" {
   default     = ""
   description = "Name of storage bucket used for storing remote Terraform state."
 }
+
+# Resources as a json/yaml
+
+variable "resources" {
+  type        = any
+  description = "Resources as JSON (see README.md). You can read values from a YAML file with yamldecode()."
+}
